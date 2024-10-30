@@ -1,34 +1,16 @@
 "use client";
 
 import { useArtworkSearch } from "../hooks/useArtworkSearch";
+import { Artwork, NameValue } from "../lib/type/artwork";
+import { FilterOptions } from "../page";
 
 type ArtworkListProps = {
   keyword: string;
-};
-
-type NameValue = {
-  "@value": string;
-  "@lang": string;
-};
-
-type Artwork = {
-  "@id": string;
-  "schema:name": NameValue[];
-  "schema:dateCreated"?: string;
-  "schema:creator"?: {
-    "schema:name": NameValue[];
-  };
-  "schema:size"?: string;
-  "schema:genre"?: Array<{ "skos:preflabel": NameValue }>;
-  "schema:isPartOf"?: Array<{
-    "schema:maintainer"?: Array<{
-      "schema:name": NameValue[];
-    }>;
-  }>;
+  filters: FilterOptions;
 };
 
 const getLocalizedValue = (
-  values?: NameValue | NameValue[],
+  values?: NameValue | NameValue[] | undefined,
   preferredLang: string = "en"
 ): string => {
   if (!values) return "";
@@ -36,13 +18,13 @@ const getLocalizedValue = (
     const preferredValue = values.find((v) => v["@lang"] === preferredLang)?.[
       "@value"
     ];
-    return preferredValue || values[0]["@value"] || "";
+    return preferredValue || values[0]?.["@value"] || "";
   }
   return values["@value"] || "";
 };
 
-export default function ArtworkList({ keyword }: ArtworkListProps) {
-  const { data, isLoading, error } = useArtworkSearch(keyword);
+export default function ArtworkList({ keyword, filters }: ArtworkListProps) {
+  const { data, isLoading, error } = useArtworkSearch(keyword, filters);
 
   if (isLoading) return <div className="text-center">Loading...</div>;
   if (error)
@@ -52,10 +34,38 @@ export default function ArtworkList({ keyword }: ArtworkListProps) {
       </div>
     );
 
-  const artworks = data?.["@graph"] || [];
+  let artworks: Artwork[] = [];
+
+  if (Array.isArray(data)) {
+    artworks = data;
+  } else if (data && data["@graph"]) {
+    artworks = data["@graph"];
+  }
+
+  console.log("Original artworks:", artworks);
+
+  // Client-side filtering
+  if (filters.artist_name) {
+    artworks = artworks.filter((artwork) => {
+      const artistName = getLocalizedValue(
+        artwork["schema:creator"]?.["schema:name"]
+      );
+      return artistName
+        .toLowerCase()
+        .includes(filters.artist_name?.toLowerCase() || "");
+    });
+  }
+
+  // Add other filters similarly
+
+  console.log("Filtered artworks:", artworks);
 
   if (artworks.length === 0) {
-    return <div className="text-center">No results found</div>;
+    return (
+      <div className="text-center">
+        No results found for "{keyword}" with the applied filters
+      </div>
+    );
   }
 
   return (
