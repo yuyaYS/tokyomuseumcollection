@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## This is a client side web application calling (Tokyo museum collection API)[https://museumcollection.tokyo/developer/]
 
-## Getting Started
+Build with
 
-First, run the development server:
+- Next.js: the use of client and server component
+- React-query: fetch and state management
+- Tailwind CSS
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## thought
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- I wish the image src of artwork was not available on their API. My inital goal was to create with nice UI, but image was not available and I have to scrap image data from their individual single artwork page like (https://museumcollection.tokyo/en/works/107999/), then scrap image.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Thanks for providing (Tokyo museum collection API)[https://museumcollection.tokyo/developer/]
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Japanese
 
-## Learn More
+## こちらはクライエントサイトで (Tokyo museum collection API)[https://museumcollection.tokyo/developer/]を使用します。
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js: クライアントとサーバーコンポーネントの使用
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- React-query：フェッチと状態管理
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Tailwind CSS
 
-## Deploy on Vercel
+## 思ったこと
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- アートワークの画像 src が API で利用できないのを知らずに作成していました。当初の目的は素敵な UI を作ることだったのですが、画像は利用できず、(https://museumcollection.tokyo/en/works/107999/)のような個々の作品ページから画像データをスクラップし、画像をスクラップすることは可能でしたが。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+(東京ミュージアムコレクション API)[https://museumcollection.tokyo/developer/]を提供していただきありがとうございます。
