@@ -1,5 +1,3 @@
-"use client";
-
 import { useArtworkSearch } from "../hooks/useArtworkSearch";
 import { Artwork, NameValue } from "../lib/type/artwork";
 import { FilterOptions } from "../page";
@@ -55,8 +53,6 @@ export default function ArtworkList({ keyword, filters }: ArtworkListProps) {
         .includes(filters.artist_name?.toLowerCase() || "");
     });
   }
-
-  // Add other filters similarly
 
   console.log("Filtered artworks:", artworks);
 

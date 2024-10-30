@@ -17,11 +17,7 @@ const museums = [
   { code: "tobikan", name: "Tokyo Metropolitan Art Museum " },
 ];
 
-const genres = [
-  "blocl-print",
-  "other prints",
-  // Add other genres here
-];
+const genres = ["blocl-print", "other prints"];
 
 export default function SearchFilter({ onFilterChange }: SearchFilterProps) {
   const [filters, setFilters] = useState<FilterOptions>({});
