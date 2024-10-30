@@ -63,7 +63,7 @@ export default function ArtworkList({ keyword, filters }: ArtworkListProps) {
   if (artworks.length === 0) {
     return (
       <div className="text-center">
-        No results found for "{keyword}" with the applied filters
+        No results found for {keyword} with the applied filters
       </div>
     );
   }

@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
   const keyword = searchParams.get("keyword");
   const artist_name = searchParams.get("artist_name");
-  const museums = searchParams.getAll("museums[]"); // Use getAll instead of get
+  const museums = searchParams.getAll("museums[]");
 
   console.log("Keyword:", keyword);
   console.log("Artist Name:", artist_name);
@@ -16,7 +16,7 @@ export async function GET(request: Request) {
   if (!keyword) {
     return NextResponse.json({ error: "Keyword is required" }, { status: 400 });
   }
-  const apiUrl = new URL("https://museumcollection.tokyo/works/");
+  const apiUrl = new URL(API_BASE_URL);
   apiUrl.searchParams.append("keyword", keyword);
   apiUrl.searchParams.append("output", "json");
 
